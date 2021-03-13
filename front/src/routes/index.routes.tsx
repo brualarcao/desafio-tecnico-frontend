@@ -1,14 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+
+import { AuthProvider } from '../hooks/AuthContext';
 
 import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 
 const Routes: React.FC = () => (
-  <BrowserRouter>
+  <Switch>
     <Route exact path="/" component={SignIn} />
     <Route exact path="/home" component={Home} />
-  </BrowserRouter>
+  </Switch>
 );
 
 export default Routes;

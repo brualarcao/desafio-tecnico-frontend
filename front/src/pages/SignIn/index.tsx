@@ -1,34 +1,75 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi';
 import logoImg from '../../assets/logoLcPng.png';
+import { useAuth } from '../../hooks/AuthContext';
+import api from '../../services/backApi';
 
 import { Container, Content, Background } from './styles';
 
-const SignIn: React.FC = () => (
-  <Container>
-    <Content>
-      <img src={logoImg} alt="Let's Code" />
+function initialState() {
+  return { user: '', password: '' };
+}
 
-      <form>
-        <h1>Faça seu login!</h1>
+const SignIn: React.FC = () => {
+  const [values, setValues] = useState(initialState);
 
-        <input placeholder="E-mail" />
+  const { signIn, data } = useAuth();
 
-        <input type="password" placeholder="Senha" />
+  console.log(data);
 
-        <button type="submit">Entrar</button>
+  function onChange(event: any) {
+    const { value, name } = event.target;
 
-        <a href="forgot">Esqueci minha senha</a>
-      </form>
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  }
 
-      <a href="login">
-        <FiLogIn />
-        Criar conta
-      </a>
-    </Content>
+  return (
+    <Container>
+      <Content>
+        <img src={logoImg} alt="Let's Code" />
 
-    <Background />
-  </Container>
-);
+        <form>
+          <h1>Faça seu login!</h1>
 
+          <input
+            name="user"
+            placeholder="Usuario"
+            onChange={onChange}
+            value={values.user}
+          />
+
+          <input
+            name="password"
+            type="password"
+            placeholder="Senha"
+            onChange={onChange}
+            value={values.password}
+          />
+
+          <button
+            type="button"
+            onClick={() =>
+              signIn({ login: values.user, senha: values.password })
+            }
+          >
+            Entrar
+          </button>
+
+          <a href="https://letscode.com.br/">Esqueci minha senha</a>
+        </form>
+
+        <a href="https://letscode.com.br/">
+          <FiLogIn />
+          Criar conta
+        </a>
+      </Content>
+
+      <Background />
+    </Container>
+  );
+};
 export default SignIn;

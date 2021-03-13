@@ -1,12 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
-import {
-  FiPlusCircle,
-  FiArrowRight,
-  FiArrowLeft,
-  FiDelete,
-  FiEdit,
-  FiTrash,
-} from 'react-icons/fi';
+import { FiArrowRight, FiArrowLeft, FiTrash } from 'react-icons/fi';
+import { useAuth } from '../../hooks/AuthContext';
 import {
   Container,
   TopBar,
@@ -23,36 +18,39 @@ import {
   Typography,
 } from './styles';
 import logoImg from '../../assets/logoLcPng.png';
-import loadList from '../../services/api';
 
-interface Task {
-  id: number;
+interface DataApi {
   titulo: string;
   conteudo: string;
   lista: string;
+  id: string;
 }
 
 const Home: React.FC = () => {
-  const [lists, setlists] = useState(loadList());
-  const [toDo, setToDo] = useState<[Task]>();
-  const [doing, setDoing] = useState<[Task]>();
-  const [done, setDone] = useState<[Task]>();
+  const { listApi } = useAuth();
+  const [lists, setLists] = useState(listApi);
 
-  const listToDo = lists.filter(function (list) {
-    return list.lista === 'ToDo';
-  });
+  const onChange = (state: string, id: string) => {
+    if (lists) {
+      const newTodoList = lists.map(todo => {
+        if (todo.id === id) {
+          // eslint-disable-next-line no-param-reassign
+          todo.lista = state;
+        }
+        return todo;
+      });
+      setLists(newTodoList);
+    }
+  };
 
-  const listDoing = lists.filter(function (list) {
-    return list.lista === 'Doing';
-  });
-
-  const listDone = lists.filter(function (list) {
-    return list.lista === 'Done';
-  });
-
-  console.log('Todo : ', listToDo);
-  console.log('Doing : ', listDoing);
-  console.log('Done : ', listDone);
+  const onDelete = (id: string) => {
+    if (lists) {
+      const newTodoList = lists.filter(todo => {
+        return todo.id !== id;
+      });
+      setLists(newTodoList);
+    }
+  };
 
   return (
     <Container>
@@ -71,59 +69,106 @@ const Home: React.FC = () => {
 
         <TodoCardContainer>
           <Typography>To Do</Typography>
-          {listToDo.map(list => (
-            <TodoCard>
-              <input type="text" placeholder={list.titulo} />
-              <input type="text" placeholder={list.conteudo} />
-              <ButtonsArea>
-                <button type="button">
-                  <FiTrash />
-                </button>
-                <button type="button">
-                  <FiArrowRight />
-                </button>
-              </ButtonsArea>
-            </TodoCard>
-          ))}
+          {lists
+            ? lists
+                .filter(l => l.lista === 'ToDo')
+                .map(list => (
+                  <TodoCard>
+                    <input type="text" placeholder={list.titulo} />
+                    <input type="text" placeholder={list.conteudo} />
+                    <ButtonsArea>
+                      <button
+                        onClick={() => {
+                          onDelete(list.id);
+                        }}
+                        type="button"
+                      >
+                        <FiTrash />
+                      </button>
+                      <button
+                        onClick={() => {
+                          onChange('Doing', list.id);
+                        }}
+                        type="button"
+                      >
+                        <FiArrowRight />
+                      </button>
+                    </ButtonsArea>
+                  </TodoCard>
+                ))
+            : null}
         </TodoCardContainer>
 
         <DoingCardContainer>
           <Typography>Doing</Typography>
-          {listDoing.map(list => (
-            <DoingCard>
-              <input type="text" placeholder={list.titulo} />
-              <input type="text" placeholder={list.conteudo} />
-              <ButtonsArea>
-                <button type="button">
-                  <FiArrowLeft />
-                </button>
-                <button type="button">
-                  <FiTrash />
-                </button>
-                <button type="button">
-                  <FiArrowRight />
-                </button>
-              </ButtonsArea>
-            </DoingCard>
-          ))}
+          {lists
+            ? lists
+                .filter(l => l.lista === 'Doing')
+                .map(list => (
+                  <DoingCard>
+                    <input type="text" placeholder={list.titulo} />
+                    <input type="text" placeholder={list.conteudo} />
+                    <ButtonsArea>
+                      <button
+                        onClick={() => {
+                          onChange('ToDo', list.id);
+                        }}
+                        type="button"
+                      >
+                        <FiArrowLeft />
+                      </button>
+                      <button
+                        onClick={() => {
+                          onDelete(list.id);
+                        }}
+                        type="button"
+                      >
+                        <FiTrash />
+                      </button>
+                      <button
+                        onClick={() => {
+                          onChange('Done', list.id);
+                        }}
+                        type="button"
+                      >
+                        <FiArrowRight />
+                      </button>
+                    </ButtonsArea>
+                  </DoingCard>
+                ))
+            : null}
         </DoingCardContainer>
 
         <DoneCardContainer>
           <Typography>Done</Typography>
-          {listDone.map(list => (
-            <DoneCard>
-              <input type="text" placeholder={list.titulo} />
-              <input type="text" placeholder={list.conteudo} />
-              <ButtonsArea>
-                <button type="button">
-                  <FiArrowLeft />
-                </button>
-                <button type="button">
-                  <FiTrash />
-                </button>
-              </ButtonsArea>
-            </DoneCard>
-          ))}
+          {lists
+            ? lists
+                .filter(l => l.lista === 'Done')
+                .map(list => (
+                  <DoneCard>
+                    <input type="text" placeholder={list.titulo} />
+                    <input type="text" placeholder={list.conteudo} />
+                    <ButtonsArea>
+                      <button
+                        onClick={() => {
+                          onChange('Doing', list.id);
+                        }}
+                        type="button"
+                      >
+                        <FiArrowLeft />
+                      </button>
+                      <button
+                        onClick={() => {
+                          onDelete(list.id);
+                        }}
+                        type="button"
+                      >
+                        <FiTrash />
+                      </button>
+                    </ButtonsArea>
+                  </DoneCard>
+                ))
+            : null}
         </DoneCardContainer>
       </Content>
     </Container>

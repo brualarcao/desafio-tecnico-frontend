@@ -48,7 +48,8 @@ export const NewCardContainer = styled.div`
   padding: 16px;
   border-right: 2px solid #fdd400;
 
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 25%;
 `;
 
@@ -102,8 +103,10 @@ export const TodoCardContainer = styled.div`
 
   padding: 16px;
   border-right: 2px solid #fdd400;
+  border-left: 2px solid #fdd400;
 
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 25%;
 `;
 
@@ -165,8 +168,10 @@ export const DoingCardContainer = styled.div`
 
   padding: 16px;
   border-right: 2px solid #fdd400;
+  border-left: 2px solid #fdd400;
 
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 25%;
 `;
 
@@ -220,8 +225,10 @@ export const DoneCardContainer = styled.div`
   flex-direction: column;
 
   padding: 16px;
+  border-left: 2px solid #fdd400;
 
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 25%;
 `;
 
