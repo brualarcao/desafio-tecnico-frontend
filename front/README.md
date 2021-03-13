@@ -1,5 +1,7 @@
 <h1 align="center">
+  <a href="https://letscode.com.br/">
   <img alt="Logo" src="https://letscode.com.br/images/logoLcPng.png" width="200px">
+  </a>
 </h1>
 
 <h3 align="center">
@@ -76,7 +78,7 @@ $ yarn start
 
 Lembrando que, infelizmente, não consegui finalizar alguns requisitos e com isso, para realizar a inserção de cards na API após a mesma estar rodando, é necessário o envio dos dados do card por um software (Insomnia no meu caso, Postman ou algo semelhante) que fará o envio da rota POST e inserindo os cards que serão representados na dashboard.
 
-Primeiramente, será necessário adquirir o token na rota: (POST) http://0.0.0.0:5000/login/
+Primeiramente, será necessário adquirir o token na rota: (POST) http://0.0.0.0:5000/login/ <br>
 Enviando o body da seguinte forma:
 ```bash
 { "login":"letscode", "senha":"lets@123"}
