@@ -27,9 +27,9 @@ O desafio consiste em criar uma dashboard que atuaria como um quadro de tasks qu
 
 Tecnologias utilizadas para a construção do projeto:
 
-- [HTML](https://www.typescriptlang.org/)
-- [Styled-Components](https://www.typescriptlang.org/)
-- [ReactJS](https://www.typescriptlang.org/)
+- [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
+- [Styled-Components](https://styled-components.com/)
+- [ReactJS](https://pt-br.reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Axios](https://www.npmjs.com/package/axios)
 - [Eslint](https://eslint.org/)
@@ -40,19 +40,19 @@ Tecnologias utilizadas para a construção do projeto:
 <div id="started"></div>
 ## 💻 Preparando tudo!
 
-### Requirements
+### Requisitos
 
 - [Node.js](https://nodejs.org/en/)
 - [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
 
-**Clone the project and access the folder**
+**Clone o projeto e acesse a pasta**
 
 ```bash
 $ git clone https://github.com/brualarcao/desafio-tecnico-frontend.git && cd desafio-tecnico-frontend/front
 ```
 
 
-**Follow the steps below for install the dependencies**
+**Siga os comandos abaixo para instalar as dependencias**
 
 ```bash
 # Instalando as dependencias
@@ -68,7 +68,7 @@ $ yarn start
 
 
 <div id="use"></div>
-## Utilizando
+### Utilizando
 
 ### O uso consiste em gerenciar os cards entre os estados, excluir e adicionar novas tasks.
 
@@ -86,26 +86,32 @@ E o retorno da rota será o token, que deve ser incluído em todas as requisiç�
 Authorization : 'Bearer <token>'
 ```
 
-Utilizando a rota: (POST)      http://0.0.0.0:5000/cards/
+Utilizando a rota: (POST)      http://0.0.0.0:5000/cards/<br>
 Informe no body o seguinte json:
 ```bash
 {
-    titulo : string,
-    conteudo: string,
-    lista: string
+    "titulo": string,
+    "conteudo": string,
+    "lista": string
 }
 ```
+Onde o titulo e conteudo ficariam a seu critério e, <br>
+o atributo lista, deve ser exatamente <br>
 
-Não esqueça de fornecer o token obtido após autenticação na rota de login.
+ToDo - lista de tasks a serem feitas<br>
+Doing - lista de tasks sendo feitas<br>
+Done - lista de itens finalizadas <br>
 
-Feito isso, com os cards criados, agora é possível acessar o localhost onde o projeto está rodando e realizar o login com as credenciais abaixo e assim, obter acesso a dashboard.
+Não esqueça de fornecer o token obtido após autenticação na rota de login.<br>
 
-Credenciais:
-Login: letscode
-Senha: lets@123
+Feito isso, com os cards criados, agora é possível acessar o localhost onde o projeto está rodando e realizar o login com as credenciais abaixo e assim, obter acesso a dashboard.<br>
+
+Credenciais:<br>
+Login: letscode<br>
+Senha: lets@123<br>
 
 <div id="Obs"></div>
-## Observações
+### Observações
 
 Infelizmente tive problemas de saúde que me permitiram iniciar o desafio somente na tarde de terça, não que seja desculpa pois fiquei todos esses dias tentando realizar a proposta e não estou satisfeito com o que estou enviando a vocês, haha
 Primeiramente gostaria de agradecer a oportunidade e deixar registrado que pude aprender muita coisa com o desafio proposto, foi de grande valor para mim independente de qualquer coisa.
